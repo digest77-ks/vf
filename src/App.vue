@@ -1,42 +1,47 @@
 <template>
-    <v-app>
-      <v-container>
-        <v-app-bar color='primary' dark >
-          <v-app-bar-nav-icon/>
-          <v-app-bar-title>Page Bar</v-app-bar-title>
-          <v-spacer/>
-          <v-btn icon to='/about'>
-            <v-icon>mdi-magnify</v-icon>
-          </v-btn>
-          <v-btn icon to='/'>
-            <v-icon>mdi-magnify</v-icon>
-          </v-btn>
-      </v-app-bar>
-      </v-container>
-      <v-main>
-        <router-view/>
-      </v-main>
-      <v-footer
-      class="bg-indigo-lighten-1 text-center d-flex flex-column"
-
-    >
-      <v-row justify="center" no-gutters>
-        <v-btn
-          v-for="link in links"
-          :key="link"
-          class="mx-2"
-          color="white"
-          rounded="xl"
-          variant="text"
+  <v-card>
+    <v-layout>
+      <v-app-bar
+          color="primary"
+          prominent
         >
-          {{ link }}
+        <v-app-bar-nav-icon @click="drawer = !drawer" />
+        <v-toolbar-title>My Pages</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon to='/about'>
+          <v-icon>mdi-magnify</v-icon>
+         </v-btn>
+        <v-btn icon to='/'>
+          <v-icon>mdi-magnify</v-icon>
         </v-btn>
-        <v-col class="text-center mt-4" cols="12">
-          {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-        </v-col>
-      </v-row>
-    </v-footer>
-    </v-app>
+      </v-app-bar>
+      <v-navigation-drawer v-model = "drawer">
+         <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="title">
+              Application
+            </v-list-item-title>
+            <v-list-item-subtitle>
+              subtext
+            </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-divider></v-divider>
+      </v-navigation-drawer>
+      <router-view/>
+    </v-layout>
+        <v-footer
+        class="bg-indigo-lighten-1 text-center d-flex flex-column"
+
+      >
+        <v-row justify="center" no-gutters>
+          <v-col class="text-center mt-4" cols="12">
+            {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
+          </v-col>
+        </v-row>
+      </v-footer>
+  </v-card>
 </template>
 
 <script>
@@ -45,16 +50,11 @@ export default {
   components: {
 
   },
-  data: () => ({
-    links: [
-      'Home',
-      'About Us',
-      'Team',
-      'Services',
-      'Blog',
-      'Contact Us'
-    ]
-  })
+  data () {
+    return {
+      drawer: false
+    }
+  }
 
 }
 </script>
