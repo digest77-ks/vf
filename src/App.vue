@@ -6,14 +6,9 @@
           prominent
         >
         <v-app-bar-nav-icon @click="drawer = !drawer" />
-        <v-toolbar-title>My Pages</v-toolbar-title>
+        <site-title :title='title'></site-title>
         <v-spacer></v-spacer>
-        <v-btn icon to='/about'>
-          <v-icon>mdi-magnify</v-icon>
-         </v-btn>
-        <v-btn icon to='/'>
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
+
       </v-app-bar>
       <v-navigation-drawer v-model = "drawer">
          <v-list-item>
@@ -28,31 +23,31 @@
         </v-list-item>
 
         <v-divider></v-divider>
+        <site-menu></site-menu>
       </v-navigation-drawer>
       <router-view/>
     </v-layout>
-        <v-footer
-        class="bg-indigo-lighten-1 text-center d-flex flex-column"
-
-      >
-        <v-row justify="center" no-gutters>
-          <v-col class="text-center mt-4" cols="12">
-            {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-          </v-col>
-        </v-row>
-      </v-footer>
+    <site-footer :footer='footer'></site-footer>
   </v-card>
 </template>
 
 <script>
+import SiteTitle from '@/views/site/TitleChange'
+import SiteFooter from '@/views/site/FooterChange'
+import SiteMenu from '@/views/site/MenuChange'
+
 export default {
   name: 'App',
   components: {
-
+    SiteTitle,
+    SiteFooter,
+    SiteMenu
   },
   data () {
     return {
-      drawer: false
+      drawer: false,
+      title: 'This is title',
+      footer: 'Footer'
     }
   }
 
